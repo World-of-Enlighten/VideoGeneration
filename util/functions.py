@@ -12,3 +12,4 @@ def roundToMultiple(n,r=3):
     else:
         return n//r
     
+print(roundToMultiple(9))

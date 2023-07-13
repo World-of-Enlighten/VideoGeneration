@@ -9,9 +9,17 @@ Use :
 ```py
 with sync_playwright() as playwright:
     scraper = Scraper(playwright)
-    scraper.tiktokHashtags("<your tag>")
+    scraper.tiktokHashtags("<number hashtags>","<your tag>")
 ```
 
+Note that all the variables in this function are optionnals. <br>
+
+
+- `<number hashtags>` is `9`
+- `<your tag>` is `Health`
+
+
+Replace `<number hashtags` by any positive integer between 3 and 100.
 Replace `<your tag>` by one of the tags available in <a href="https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en">TikTok Creative Center</a>.
 
 <details>

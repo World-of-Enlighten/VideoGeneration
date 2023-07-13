@@ -10,7 +10,7 @@ class Scraper:
         self.page = None
 
     def setup(self):
-        self.browser = self.playwright.chromium.launch(headless=True)
+        self.browser = self.playwright.chromium.launch(headless=False)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
             permissions=["geolocation"],
@@ -23,9 +23,13 @@ class Scraper:
         self.context.close()
         self.browser.close()
 
-    def tiktokHashtags(self,tag='Health',timeout=0):
+    def tiktokHashtags(self,numHashtags=9,tag='Health'):
         if tag not in data.tiktokTags:
-            raise AssertionError("Error, your tag does not exist")
+            raise AssertionError("Error, your tag does not exist. The tag should be one of the tags available in TikTok creative, ")
+        if type(numHashtags)!=int or numHashtags<3 or numHashtags>100:
+            raise AssertionError("Error, the numHashtags value is incorrect. It should be an integer comprised between 3 and 100.")
+        else:
+            numHashtags=roundToMultiple(numHashtags)
         self.setup()
         self.page.goto("https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en")
 
@@ -34,8 +38,8 @@ class Scraper:
         print("[1] Region changed")
 
         # [2] Set to UK
-        self.page.click('[placeholder="Start typing or select from the list"]')
-        self.page.fill('[placeholder="Start typing or select from the list"]', "united kin")
+        self.page.get_by_placeholder("Start typing or select from the list").click()
+        self.page.get_by_placeholder("Start typing or select from the list").fill("united kin")
         self.page.get_by_test_id("cc_rimless_select_undefined_item_68").click()
         print("[2] Set to UK")
 
@@ -45,17 +49,19 @@ class Scraper:
         print("[3] Set to #health")
 
         # [4] View more hashtags
-        for _ in range(3):
+        for i in range(numHashtags):
             self.page.get_by_test_id("cc_contentArea_viewmore_btn").get_by_text("View More").click()
-        print("[4] Pressed view more button to get more hashtags")
+            print(f"[3.{i}] Clicked view more button")
+        print("[4] End click view more button")
 
         # [5] Getting hashtags
         health_hashtags = self.page.query_selector_all('.CardPc_titleText__RYOWo')
+        output = []
         print("[5] Got hashtags")
         for hashtag in health_hashtags:
-            print(hashtag.inner_text())
-        self.page.wait_for_timeout(timeout)
+            output.append(hashtag.inner_text())
         self.teardown()
+        return output[:numHashtags]
 
     def googleMaps(self,timeout=10000):
         #this function allows to check geolocation settings
@@ -75,4 +81,4 @@ class Scraper:
 
 with sync_playwright() as playwright:
     scraper = Scraper(playwright)
-    scraper.tiktokHashtags("Sport")
+    print(scraper.tiktokHashtags())
