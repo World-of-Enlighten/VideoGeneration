@@ -1,0 +1,20 @@
+tiktokTags = [
+    "Apparel & Accessories",
+    "Baby, Kids & Maternity",
+    "Beauty & Personal Care",
+    "Business Services",
+    "Education",
+    "Financial Services",
+    "Food & Beverage",
+    "Games",
+    "Health",
+    "Home Improvement",
+    "Household Products",
+    "Life Services",
+    "News & Entertainment",
+    "Pets",
+    "Sports & Outdoor",
+    "Tech & Electronics",
+    "Travel",
+    "Vehicle & Transportation"
+]

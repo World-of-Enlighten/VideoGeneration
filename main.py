@@ -1,5 +1,6 @@
 from playwright.sync_api import Playwright, sync_playwright
-
+from util.functions import *
+import util.data as data
 
 class Scraper:
     def __init__(self, playwright: Playwright):
@@ -9,7 +10,7 @@ class Scraper:
         self.page = None
 
     def setup(self):
-        self.browser = self.playwright.chromium.launch(headless=False)
+        self.browser = self.playwright.chromium.launch(headless=True)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
             permissions=["geolocation"],
@@ -22,7 +23,9 @@ class Scraper:
         self.context.close()
         self.browser.close()
 
-    def tiktokHashtags(self,timeout=0):
+    def tiktokHashtags(self,tag='Health',timeout=0):
+        if tag not in data.tiktokTags:
+            raise AssertionError("Error, your tag does not exist")
         self.setup()
         self.page.goto("https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en")
 
@@ -38,7 +41,7 @@ class Scraper:
 
         # [3] Change hashtags
         self.page.locator("#hashtagIndustrySelect").get_by_role("img").click()
-        self.page.get_by_test_id("cc_single_select_undefined_item_8").get_by_text("Health").click()
+        self.page.get_by_test_id("cc_single_select_undefined_item_8").get_by_text(tag).click()
         print("[3] Set to #health")
 
         # [4] View more hashtags
@@ -62,12 +65,6 @@ class Scraper:
         self.page.wait_for_timeout(timeout)
         self.teardown()
 
-    def regionTiktok(self,timeout=0):
-        self.setup()
-        self.page.goto("https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en")
-        self.page.wait_for_timeout(timeout)
-        self.teardown()
-
     def browserOpen(self):
         self.setup()
         self.page.goto("https://google.com")
@@ -78,4 +75,4 @@ class Scraper:
 
 with sync_playwright() as playwright:
     scraper = Scraper(playwright)
-    scraper.tiktokHashtags()
+    scraper.tiktokHashtags("Sport")
