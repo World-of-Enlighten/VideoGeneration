@@ -5,12 +5,7 @@ import util.data as data
 class Scraper:
     def __init__(self, playwright: Playwright):
         self.playwright = playwright
-        self.browser = None
-        self.context = None
-        self.page = None
-
-    def setup(self):
-        self.browser = self.playwright.chromium.launch(headless=False)
+        self.browser = self.playwright.webkit.launch(headless=True)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
             permissions=["geolocation"],
@@ -30,7 +25,6 @@ class Scraper:
             raise AssertionError("Error, the numHashtags value is incorrect. It should be an integer comprised between 3 and 100.")
         else:
             numHashtags=roundToMultiple(numHashtags)
-        self.setup()
         self.page.goto("https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en")
 
         # [1] Change region
@@ -66,13 +60,11 @@ class Scraper:
     def googleMaps(self,timeout=10000):
         #this function allows to check geolocation settings
         #you should click on button "Your location", otherwise it'll be your real location
-        self.setup()
         self.page.goto("https://maps.google.com")
         self.page.wait_for_timeout(timeout)
         self.teardown()
 
     def browserOpen(self):
-        self.setup()
         self.page.goto("https://google.com")
         while True:
             pass
