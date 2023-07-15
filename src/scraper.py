@@ -3,8 +3,8 @@ from util.functions import *
 import util.data as data
 
 class Scraper:
-    def __init__(self, playwright: Playwright):
-        self.playwright = playwright
+    def __init__(self):
+        self.playwright = sync_playwright().start()
         self.browser = self.playwright.webkit.launch(headless=True)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
@@ -60,6 +60,7 @@ class Scraper:
     def googleMaps(self,timeout=10000):
         #this function allows to check geolocation settings
         #you should click on button "Your location", otherwise it'll be your real location
+        #disable headless
         self.page.goto("https://maps.google.com")
         self.page.wait_for_timeout(timeout)
         self.teardown()
@@ -71,6 +72,3 @@ class Scraper:
 
 
 
-with sync_playwright() as playwright:
-    scraper = Scraper(playwright)
-    print(scraper.tiktokHashtags())
