@@ -1,23 +1,30 @@
 # Scraper API
 
-1. <a href="#tiktok-hashtags">Tiktok Hashtags</a>
-1. <a href="#ask-gpt">Ask GPT</a>
+<ul>
+<li><a href="#tiktok">Tiktok</a>
+<ul><li>Trending hashtags</li><li>Trending songs</li></ul></li>
+<li><a href="#ask-gpt">Ask GPT</a>
+<ul><li>GPT-4</li><li>GPT-3</li></ul>
+</li>
+</ul>
 
 
 ### Todo list
 
-[x] Get Tiktok trending Hashtags<br>
-[] Get TikTok trending songs<br>
-[x] Prompt to GPT<br>
-[x] Caption generation<br>
-[] Default video templates with HTML/CSS<br>
-[] Video generation with Deforum
+- [x] Get Tiktok trending Hashtags 
+- [ ] Get TikTok trending songs 
+- [x] Prompt to GPT 
+- [x] Caption generation 
+- [ ] Default video templates with HTML/CSS 
+- [ ] Video generation with Deforum 
 ## TikTok
 
 ### TikTok hashtags
 
 Use : 
 ```py
+#assuming that you are running in parent dir
+from src.scraper import Scraper
 scraper = Scraper()
 print(scraper.tiktokHashtags(numHashtags=14,tag='Education'))
 ```
@@ -65,6 +72,8 @@ There is two ways to prompt to GPT, the first one uses GPT-4 through <a href="ht
 
 In order ot use GPT-4 function, you should give a prompt, the other arguments of the function are optionnal. 
 ```py
+#assuming that you are running in parent dir
+from src.scraper import Scraper
 Scraper().askGPT('hello world',option=None,random=0)
 ```
 
@@ -77,6 +86,9 @@ Scraper().askGPT('hello world',option=None,random=0)
 In order to use the GPT-3 api, the arguments are the same than for GPT-4 except the fact that the `random` argument has been deleted.
 
 ```py
-print(Completion.create("<your prompt",option='caption'))
-
+#assuming that you are running in parent dir
+from src.gpt import Completion
+print(Completion.create("hello world",option='caption'))
 ```
+
+Same for GPT-4, default value of option is `caption` and it is an optional argument.
