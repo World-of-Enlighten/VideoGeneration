@@ -1,15 +1,23 @@
 # Scraper API
 
-This is an API *(in progress)* allows to scrape data from various website using <a href="https://playwright.dev">playwrighter</a>.
-Documentation upcoming.
+1. <a href="#tiktok-hashtags">Tiktok Hashtags</a>
+1. <a href="#ask-gpt">Ask GPT</a>
 
+
+### Todo list
+
+[x] Get Tiktok trending Hashtags<br>
+[] Get TikTok trending songs<br>
+[x] Prompt to GPT<br>
+[x] Caption generation<br>
+[] Default video templates with HTML/CSS<br>
+[] Video generation with Deforum
 ## Tiktok Hashtags
 
 Use : 
 ```py
-with sync_playwright() as playwright:
-    scraper = Scraper(playwright)
-    scraper.tiktokHashtags("<number hashtags>","<your tag>")
+scraper = Scraper()
+print(scraper.tiktokHashtags())
 ```
 
 Note that all the variables in this function are optionnals. <br>
@@ -43,3 +51,7 @@ Replace `<your tag>` by one of the tags available in <a href="https://ads.tiktok
 - Travel<br>
 - Vehicle & Transportation<br>
 </details>
+
+## Ask GPT
+
+There is two ways to prompt to GPT, the first one uses GPT-4 through <a href="https://you.com">you.com</a> and <a href="https://playwright.dev">playwright.dev</a> the second one 

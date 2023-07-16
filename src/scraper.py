@@ -1,6 +1,13 @@
 from playwright.sync_api import Playwright, sync_playwright
-from util.functions import *
-import util.data as data
+
+try:
+    from src.util.functions import *
+    import src.util.data as data
+    from src.util.mail import *
+except:
+    from util.functions import *
+    import util.data as data
+    from util.mail import *
 
 class Scraper:
     def __init__(self):
@@ -70,5 +77,45 @@ class Scraper:
         while True:
             pass
 
+    def askGPT(self,prompt,random=0, option='caption'):
+        self.page.goto("https://you.com")
+        self.page.screenshot(path="screenshot.png")
+        self.page.locator("body").click()
+        self.page.get_by_test_id("sign-in-button").click()
+        self.page.get_by_placeholder("example@email.com").click()
+        if random:
+            mailbox=getRandomMailbox()
+            self.page.get_by_placeholder("example@email.com").fill(mailbox)
+            self.page.get_by_role("button", name="Continue with email").click()
+            self.page.get_by_role("textbox", name="Password").click()
+            self.page.get_by_role("textbox", name="Password").fill("thisismypassword&")
+            self.page.get_by_role("button", name="Continue").click()
+        else:
+            mailbox=getEnlightenMailbox()
+            self.page.get_by_placeholder("example@email.com").fill(mailbox)
+            self.page.get_by_role("button", name="Continue with email").click()
+            self.page.goto(getLoginLink(mailbox))
+        self.page.get_by_test_id("search-input").click()
+        self.page.get_by_test_id("search-input").fill(data.prompts[option])
+        self.page.get_by_test_id("submit-button").click()
+        answer = self.page.query_selector_all("p[data-testid=youchat-text]")
+        #print(answer[0].inner_text())
+        self.page.get_by_test_id("youchat-input-textarea").click()
+        self.page.get_by_test_id("youchat-input-textarea").fill(prompt)
+        self.page.get_by_test_id("youchat-input").get_by_role("button").click()
+        self.page.wait_for_timeout(3000)
+        #final_answer=self.page.query_selector_all("p[data-testid=youchat-text]")
+        final_answer=re.findall('''<p data-testid="youchat-text"(.*?)</p>''',self.page.content())
+        while "Stop generating" in self.page.content():
+            #print("[P] Generation in progress")
+            final_answer=re.findall('''<p data-testid="youchat-text"(.*?)</p>''',self.page.content())
+        self.teardown()
+        out=[]
+        for ans in final_answer:
+            out.append(''.join(ans.split('">')[1:]))
+        return out
+        
 
 
+
+print(Scraper().askGPT('hello world',option='none'))
