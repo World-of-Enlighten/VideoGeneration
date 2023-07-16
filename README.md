@@ -15,7 +15,7 @@
 - [ ] Get TikTok trending songs 
 - [x] Prompt to GPT 
 - [x] Caption generation 
-- [ ] Default video templates with HTML/CSS 
+- [ ] Default video templates with <a href="https://www.remotion.dev/">remotion</a>
 - [ ] Video generation with Deforum 
 ## TikTok
 
