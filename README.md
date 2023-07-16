@@ -65,7 +65,7 @@ There is two ways to prompt to GPT, the first one uses GPT-4 through <a href="ht
 
 In order ot use GPT-4 function, you should give a prompt, the other arguments of the function are optionnal. 
 ```py
-Scraper().askGPT('hello world',option='none',random=0)
+Scraper().askGPT('hello world',option=None,random=0)
 ```
 
 - `option` : Choose whether you want default instructions or not. Using `None` it will be a « vanilla » GPT-4, else it would be given instructions about the generation : it will generate captions for a TikTok video depending on a long description. <u>The default value of option is `caption`</u>
@@ -73,3 +73,10 @@ Scraper().askGPT('hello world',option='none',random=0)
 <u>`random` is set to `False` by default.</u> You will not need to change this, except in case you're not getting answers.
 
 ### GPT-3
+
+In order to use the GPT-3 api, the arguments are the same than for GPT-4 except the fact that the `random` argument has been deleted.
+
+```py
+print(Completion.create("<your prompt",option='caption'))
+
+```
