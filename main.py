@@ -25,5 +25,6 @@ def getTiktokHashtags():
     return scraper.tiktokHashtags()
 
 
+
 if __name__ == '__main__':
     app.run(debug=True)
