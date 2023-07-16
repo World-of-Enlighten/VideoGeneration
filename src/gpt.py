@@ -1,16 +1,16 @@
 import os
 import requests
 import json
-try:
-    import src.util.data as data
-except:
-    import util.data as data
 
 
 class Completion:
     @staticmethod
-    def create(prompt, option='answer'):
+    def create(prompt, option='caption'):
         try:
+            try:
+                import src.util.data as data
+            except:
+                import util.data as data
             resp = ""
             content = data.prompts[option]
             endpoint = "https://ava-ai-ef611.web.app/"
@@ -22,7 +22,7 @@ class Completion:
                     headers={"Content-Type": "application/json"},
                     data=json.dumps(
                         {
-                            "model": "gpt-4",
+                            "model": "gpt-3",
                             "temperature": 0.7,
                             "messages": [
                                 {
@@ -55,3 +55,6 @@ class Completion:
             raise Exception("Unable to fetch the response.") from e
         
         return resp
+    
+
+print(Completion.create("Hello how are you ?"))
