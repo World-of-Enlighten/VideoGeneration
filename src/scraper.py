@@ -188,13 +188,13 @@ class Scraper:
 
         print(getSongs)
         for j in range(2,getSongs):
-            self.page.locator(f"div:nth-child({j}) > div > .ItemCard_soundItemContainer__GUmFb > .ItemCard_infoContentContainer__GbSoY > .ItemCard_leftContent__aA4ra > .ItemCard_coverIcon__Xu6zA").click()
-            self.page.locator(f"#cc_common_trend_sound_item_{j} > #TrendSongsListModalEnterIcon div").click()
-
-
-
-
-
+            try:
+                self.page.locator(f"div:nth-child({j}) > div > .ItemCard_soundItemContainer__GUmFb > .ItemCard_infoContentContainer__GbSoY > .ItemCard_leftContent__aA4ra > .ItemCard_coverIcon__Xu6zA").click()
+                urls.append(re.findall('''cite="(.*?)"''',self.page.content()))
+                self.page.locator(".PaginationModal_closeIcon__L4jHA").click()
+            except:
+                break
+        return urls
 
 print(Scraper().tiktokSongsVideoUrl(15))
 
