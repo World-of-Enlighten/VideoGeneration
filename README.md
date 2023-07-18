@@ -64,16 +64,27 @@ Replace `<your tag>` by one of the tags available in <a href="https://ads.tiktok
 
 ### TikTok Songs
 
-This function allows you to get all the **approved for business use** songs in TikTok Creative in a list, this returns only the name, not the song url.
-> Getting all the links would take too much time, once you get the names you will be able to download the songs using the function `tiktokDownloadSong()`
+This function allows you to get all the **approved for business use** songs in TikTok Creative in a list of file url.
 
-Here is an example that downloads a random song among all the business approved songs in the top 100.
+
 ```py
 #assuming that you are running in parent dir
 from src.scraper import Scraper
 scraper = Scraper()
-scraper.tiktokDownloadSong(random.choice(scraper.tiktokSongs()))
+print(scraper.tiktokSongs())
 ```
+
+### TikTok video that uses a song
+
+This function allows you to get the url of a video using the respective song.
+```py
+#assuming that you are running in parent dir
+from src.scraper import Scraper
+scraper = Scraper()
+print(scraper.tiktokSongsVideoUrl())
+```
+
+
 ## Ask GPT
 
 There is two ways to prompt to GPT, the first one uses GPT-4 through <a href="https://you.com">you.com</a> and <a href="https://playwright.dev">playwright.dev</a> the second one use GPT-3 through <a href="https://ava-ai-ef611.web.app/">Ava AI API</a>
