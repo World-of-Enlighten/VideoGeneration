@@ -115,12 +115,13 @@ class Scraper:
             out.append(''.join(ans.split('">')[1:]))
         return out
     
-    def tiktokSongs(self,numSongs=5):
+    def tiktokSongs(self,numSongs=10):
 
         #Determine how many times you need to click on view more
+        getSongs=numSongs
         numSongs-=3
         numSongs//=3
-        if not numSongs%3:
+        if numSongs%3!=0:
             numSongs+=1
 
         #Open the page
@@ -134,7 +135,7 @@ class Scraper:
         # [2] Set to UK
         self.page.get_by_placeholder("Start typing or select from the list").click()
         self.page.get_by_placeholder("Start typing or select from the list").fill("united kin")
-        self.page.get_by_test_id("cc_rimless_select_undefined_item_68").click()
+        self.page.get_by_test_id("cc_rimless_select_undefined_item_67").click()
         print("[2] Set to UK")
 
         #Filter only business approved
@@ -145,13 +146,21 @@ class Scraper:
             self.page.get_by_test_id("cc_contentArea_viewmore_btn").get_by_text("View More").click()
             print(f"[3.{i}] Clicked view more button ({i+1}/{numSongs})")
         print("[4] End click view more button")
-        print(self.page.locator("div:nth-child(3) > div > .ItemCard_soundItemContainer__GUmFb > .ItemCard_infoContentContainer__GbSoY > .ItemCard_leftContent__aA4ra > .ItemCard_coverIcon__Xu6zA").click())
-        self.page.wait_for_timeout(3000)
+        urls = []
+
+        print(getSongs)
+        for j in range(2,getSongs):
+            self.page.locator(f"div:nth-child({j}) > div > .ItemCard_soundItemContainer__GUmFb > .ItemCard_infoContentContainer__GbSoY > .ItemCard_leftContent__aA4ra > .ItemCard_coverIcon__Xu6zA").click()
+            urls.append(re.search('''<audio src="(.*?)"''',self.page.content()).group(1))
+
+        print(urls)
+        self.page.wait_for_timeout(30000)
+        return urls
 
 
 
 
-print(Scraper().tiktokSongs())
+print(Scraper().tiktokSongs(15))
 
 
         
