@@ -12,7 +12,7 @@ except:
 class Scraper:
     def __init__(self):
         self.playwright = sync_playwright().start()
-        self.browser = self.playwright.webkit.launch(headless=False)
+        self.browser = self.playwright.webkit.launch(headless=True)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
             permissions=["geolocation"],
@@ -94,7 +94,12 @@ class Scraper:
             mailbox=getEnlightenMailbox()
             self.page.get_by_placeholder("example@email.com").fill(mailbox)
             self.page.get_by_role("button", name="Continue with email").click()
-            self.page.goto(getLoginLink(mailbox))
+            while True:
+                try:
+                    self.page.goto(getLoginLink(mailbox))
+                    break
+                except:
+                    pass
         self.page.get_by_test_id("search-input").click()
         self.page.get_by_test_id("search-input").fill(data.prompts[option])
         self.page.get_by_test_id("submit-button").click()
@@ -113,7 +118,7 @@ class Scraper:
         out=[]
         for ans in final_answer:
             out.append(''.join(ans.split('">')[1:]))
-        return out
+        return out[1]
     
     def tiktokSongs(self,numSongs=10):
 
@@ -196,10 +201,7 @@ class Scraper:
                 break
         return urls
 
-print(Scraper().tiktokSongsVideoUrl(15))
 
-
-        
 
 
 

@@ -95,7 +95,7 @@ In order ot use GPT-4 function, you should give a prompt, the other arguments of
 ```py
 #assuming that you are running in parent dir
 from src.scraper import Scraper
-Scraper().askGPT('hello world',option=None,random=0)
+Scraper().askGPT('hello world',option='caption,random=0)
 ```
 
 - `option` : Choose whether you want default instructions or not. Using `None` it will be a « vanilla » GPT-4, else it would be given instructions about the generation : it will generate captions for a TikTok video depending on a long description. <u>The default value of option is `caption`</u>

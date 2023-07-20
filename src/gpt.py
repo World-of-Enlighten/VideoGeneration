@@ -1,9 +1,10 @@
 from json import loads, JSONDecodeError
 from requests import post, exceptions
+
 try:
-    import util.data as data
-except:
     import src.util.data as data
+except:
+    import util.data as data
 
 
 class Completion:

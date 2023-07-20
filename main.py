@@ -1,30 +1,19 @@
 from src.scraper import Scraper
-from flask import Flask, request
+from src.gpt import Completion
+scraper=Scraper()
 
-app = Flask(__name__)
-scraper = Scraper()
-@app.route('/')
-def index():
-    return "API is alive, check the <a href='https://github.com/World-of-Enlighten/TikTokTrendsAPI/blob/main/README.md'>readme</a> for usage instructions."
-
-@app.route('/api/tiktok/hashtags/', methods=['POST'])
-def postTiktokHashtags():
-    dat = request.get_json()
-    if 'numHashtags' in dat:
-        numHashtags = dat['numHashtags']
-    else:
-        numHashtags = 9
-    if 'tag' in dat:
-        tag = dat['tag']
-    else:
-        tag = 'Health'
-    return scraper.tiktokHashtags(numHashtags, tag)
-
-@app.route('/tiktok/hashtags/')
-def getTiktokHashtags():
-    return scraper.tiktokHashtags()
+def getCaption():
+    with open("example.txt") as f:
+        content=f.read()
+    #method 1
+    #return Completion.create(content)
+    #method 2
+    return scraper.askGPT(content)
 
 
+'''
+print(getCaption())
 
-if __name__ == '__main__':
-    app.run(debug=True)
+output : 
+Join us for a healing afternoon of conscious breathwork and crystal singing bowls in Cambridge. Experience a deep sense of relaxation, let go of what no longer serves you, and find balance. Conscious connected breathwork has many proven benefits for physical and psychological health. Crystal Singing Bowls produce healing frequencies that activate your parasympathetic nervous system, reducing stress and anxiety. Bring warm clothing, water, and a yoga mat. Leave feeling restored, rebalanced, and full of vitality. Contact us for any queries.
+'''

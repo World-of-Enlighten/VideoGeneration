@@ -25,3 +25,5 @@ def getLoginLink(mail):
     except:
         return "Not a verification mail"
 
+
+
