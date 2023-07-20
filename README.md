@@ -1,4 +1,13 @@
-# Scraper API
+# Video generation
+
+In order to have distinguishables videos in style while having an harmony in our posts, videos will be respecting norms :
+
+- `Intro ~5sec` : *date, title, watermarks, theme / categorie...* 
+- `Content` : *Components variables, time variable*
+- `Outro ~3sec` : *same components for each videos, with same pos but color scheme may vary*, 
+
+
+# Builtin functions
 
 <ul>
 <li><a href="#tiktok">Tiktok</a>
@@ -12,7 +21,7 @@
 ### Todo list
 
 - [x] Get Tiktok trending Hashtags 
-- [ ] Get TikTok trending songs 
+- [x] Get TikTok trending songs 
 - [x] Prompt to GPT 
 - [x] Caption generation 
 - [ ] Default video templates with <a href="https://www.remotion.dev/">remotion</a>
@@ -95,7 +104,7 @@ In order ot use GPT-4 function, you should give a prompt, the other arguments of
 ```py
 #assuming that you are running in parent dir
 from src.scraper import Scraper
-Scraper().askGPT('hello world',option='caption,random=0)
+Scraper().askGPT('hello world',option='caption',random=0))
 ```
 
 - `option` : Choose whether you want default instructions or not. Using `None` it will be a « vanilla » GPT-4, else it would be given instructions about the generation : it will generate captions for a TikTok video depending on a long description. <u>The default value of option is `caption`</u>
