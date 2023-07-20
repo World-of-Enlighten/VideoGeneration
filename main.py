@@ -13,7 +13,7 @@ def getCaption():
 def sendToRemotion(txt):
     with open("video/src/TextComposition.tsx") as f:
         content=f.readlines()
-        content[6]=txt
+        content[7]=txt
     with open("video/src/TextComposition.tsx",'w') as f:
         f.write(''.join(content))
     return 1
