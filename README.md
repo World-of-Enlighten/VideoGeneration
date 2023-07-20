@@ -1,6 +1,13 @@
 # Video generation
 
 In order to have distinguishables videos in style while having an harmony in our posts, videos will be respecting norms :
+The video template is available in another repo temporarily (<a href="https://github.com/World-of-Enlighten/VideoTemplate">VideoTemplate</a>), during the process it should be in the same directory.
+```
+#go to the desired folder
+git clone https://github.com/World-of-Enlighten/VideoGeneration
+cd VideoGeneration
+git clone https://github.com/World-of-Enlighten/VideoTemplate
+```
 
 - `Intro ~5sec` : *date, title, watermarks, theme / categorie...* 
 - `Content` : *Components variables, time variable*
