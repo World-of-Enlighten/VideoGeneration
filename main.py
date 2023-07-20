@@ -21,6 +21,7 @@ def sendToRemotion(txt):
 
 
 '''
+#this function generate captions and add them to the video
 def generateVideo():
     sendToRemotion(getCaption()) #send captions to TextComposition.tsx
 '''
