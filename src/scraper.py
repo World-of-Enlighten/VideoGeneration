@@ -12,7 +12,7 @@ except:
 class Scraper:
     def __init__(self):
         self.playwright = sync_playwright().start()
-        self.browser = self.playwright.webkit.launch(headless=True)
+        self.browser = self.playwright.webkit.launch(headless=False)
         self.context = self.browser.new_context(
             geolocation={"longitude": -0.293679, "latitude": 51.453212},
             permissions=["geolocation"],
@@ -202,6 +202,7 @@ class Scraper:
         return urls
 
 
+print(Scraper().tiktokHashtags())
 
 
 
