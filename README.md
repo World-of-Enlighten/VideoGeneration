@@ -198,5 +198,5 @@ There is two arguments :<br>
 - `theme` : Color scheme of the branding element (by default main green).
 
 ## <a id="calendar">`Calendar` tag</a>
-![Alt text](image.png)<br>
+![Alt text](https://media.discordapp.net/attachments/1122621699620352080/1140648604550320198/image.png?width=700&height=660)<br>
 This tag produces the calendar above. By default it will take the actual date (month and day) but you can change separately the month and the day as you want with the optional arguments of the same name.
