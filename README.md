@@ -21,6 +21,7 @@ git clone https://github.com/World-of-Enlighten/VideoTemplate
 <ul><a href="#delay">Delay tag</a></ul>
 <ul><a href="#branding">Branding tag</a></ul>
 <ul><a href="#calendar">Calendar tag</a></ul>
+<ul><a href="#slide">Slide tag</a></ul>
 <li>Scrapers</li>
 <ul>
 <li><a href="#tiktok">Tiktok</a>
@@ -200,3 +201,42 @@ There is two arguments :<br>
 ## <a id="calendar">`Calendar` tag</a>
 ![Alt text](https://media.discordapp.net/attachments/1122621699620352080/1140648604550320198/image.png?width=700&height=660)<br>
 This tag produces the calendar above. By default it will take the actual date (month and day) but you can change separately the month and the day as you want with the optional arguments of the same name.
+
+## <a id="slide">`Slide` tag</a>
+
+Create a slide depending on the arguments provided as `type`.<br>
+This argument is optional, by default 0. It is a number.<br>
+<details>
+  <summary>Different slide types</summary>
+  <table>
+    <thead>
+      <tr>
+        <th>Slide Number</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>
+          <img src="https://media.discordapp.net/attachments/1122621699620352080/1140658668480774194/image.png?width=738&height=1236" style="zoom: 0.3" />
+        </td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>
+          <img src="https://media.discordapp.net/attachments/1122621699620352080/1140667307102842952/image.png?width=738&height=1236" style="zoom: 0.3" />
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>
+          <img src="https://media.discordapp.net/attachments/1122621699620352080/1140667693222072431/image.png?width=738&height=1236" style="zoom: 0.3" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+
+
