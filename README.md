@@ -19,6 +19,8 @@ git clone https://github.com/World-of-Enlighten/VideoTemplate
 <ul>
 <li>Video</li>
 <ul><a href="#delay">Delay tag</a></ul>
+<ul><a href="#branding">Branding tag</a></ul>
+<ul><a href="#calendar">Calendar tag</a></ul>
 <li>Scrapers</li>
 <ul>
 <li><a href="#tiktok">Tiktok</a>
@@ -187,3 +189,14 @@ The text will appear at the beggining, so you can still put other elements withi
 ```tsx
 <Delay text={"Hello world!"} typingSpeed={1}>
 ```
+
+## <a id="branding">`Branding` tag</a>
+
+This tag allows you to display any branding element given options.
+There is two arguments :<br>
+- `type` : Type of the branding element<br>
+- `theme` : Color scheme of the branding element (by default main green).
+
+## <a id="calendar">`Calendar` tag</a>
+![Alt text](image.png)<br>
+This tag produces the calendar above. By default it will take the actual date (month and day) but you can change separately the month and the day as you want with the optional arguments of the same name.

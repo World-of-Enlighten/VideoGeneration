@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinus Curve Animation</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+
+  #container {
+    width: 100%;
+    height: 200px;
+    overflow-x: scroll;
+    border: 1px solid #ccc;
+    position: relative;
+  }
+
+  #curve {
+    fill: none;
+    stroke: red;
+    stroke-width: 2;
+    animation: slide 10s linear infinite;
+  }
+
+  @keyframes slide {
+    to {
+      transform: translateX(calc(100% - 5px));
+    }
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const svg = document.getElementById("curve");
+    const path = document.getElementById("curvePath");
+
+    const amplitude = 50;
+    const frequency = 0.03;
+    let time = 0;
+
+    function updatePath() {
+      const points = [];
+      for (let x = path.getTotalLength() || 0; x <= svg.clientWidth; x += 5) {
+        const y = amplitude * Math.sin(frequency * (x + time));
+        points.push(`${x},${svg.clientHeight / 2 - y}`);
+      }
+      path.setAttribute("d", `M ${points.join(" L ")}`);
+      time += 10;
+      requestAnimationFrame(updatePath);
+    }
+
+    updatePath();
+  });
+</script>
+</head>
+<body>
+<div id="container">
+  <svg id="curve" viewBox="0 0 2000 200">
+    <path id="curvePath"></path>
+  </svg>
+</div>
+</body>
+</html>
