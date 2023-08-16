@@ -138,6 +138,14 @@ print(Completion.create("hello world",option='caption'))
 
 Same for GPT-4, default value of option is `caption` and it is an optional argument.
 
+### GPT-3 Turbo
+
+```py
+#assuming that you are running in parent dir
+from src.gpt import Completion
+print(Completion.g4f("hello world",option='caption2'))
+```
+
 ## <a id="delay">The delay tag</a>
 
 > The delay tag serve for a lot of things. It was meant to make the video generation easier. This component is in charge of :

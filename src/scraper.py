@@ -202,7 +202,5 @@ class Scraper:
         return urls
 
 
-print(Scraper().tiktokHashtags())
-
 
 

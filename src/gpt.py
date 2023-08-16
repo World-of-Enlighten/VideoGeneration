@@ -1,6 +1,6 @@
 from json import loads, JSONDecodeError
 from requests import post, exceptions
-
+import g4f
 try:
     import src.util.data as data
 except:
@@ -47,3 +47,8 @@ class Completion:
                 except JSONDecodeError:
                     pass
         return resp
+
+    def g4f(prompt,option="caption2"):
+        response = g4f.ChatCompletion.create(model='gpt-3.5-turbo', messages=[
+                                     {"role": "user", "content": data.prompts['caption2']}])
+        return response
